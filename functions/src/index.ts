@@ -17,7 +17,7 @@ export const generateVoucherIntake = functions.https.onRequest(async (request, r
   const inputForm = path.join(__dirname, "..", "etc", "form.docx");
   const docxOutfile = tmp.fileSync();
   console.log(`Tempfile is ${docxOutfile.name}`);
-  const result = await executeBinary(inputJson, inputForm, docxOutfile.name, "darwin");
+  const result = await executeBinary(inputJson, inputForm, docxOutfile.name);
   console.log(`Exec result: ${result}`);
 
   if (request.method !== "POST" || request.header("content-type") !== "application/json") {
