@@ -13,6 +13,15 @@ export const generateVoucherIntake = functions.https.onRequest(async (request, r
     body: JSON.stringify(request.body),
   });
 
+  // The last bit is to wire the incoming request body to a temp file
+  // and set `inputJson` to the tmp file path, rather than hardcoding
+  // it to point to `test.json`
+  //
+  // e.g.
+  // const inputJsonTmpFile = tmp.fileSync();
+  // const inputJson = inputJsonTmpFile.name;
+  // fs.writeFileSync(inputJson, JSON.stringify(request.body));
+  //
   const inputJson = path.join(__dirname, "..", "etc", "test.json");
   const inputForm = path.join(__dirname, "..", "etc", "form.docx");
   const docxOutfile = tmp.fileSync();
