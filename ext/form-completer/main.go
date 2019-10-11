@@ -149,26 +149,10 @@ const (
 	Pet1DogWeight = "Dropdown10"
 	Pet1Special = "Dropdown9"
 	Pet1DistinguishingCharacteristics = "Text11"
-	Pet2Name = "Text20"
-	Pet2Breed = "Text21"
-	Pet2Color = "Text22"
-	Pet2DistinguishingCharacteristics = "Text23"
-	Pet2Species = "Dropdown11"
-	Pet2Gender = "Dropdown12"
-	Pet2Stray = "Dropdown13"
-	Pet2OlderThan5 = "Dropdown14"
-	Pet2DogWeight = "Dropdown15"
-	Pet2Special = "Dropdown16"
-	Pet3Name = "Text27"
-	Pet3Breed = "Text28"
-	Pet3Color = "Text29"
-	Pet3DistinguishingCharacteristics = "Text30"
-	Pet3Species = "Dropdown17"
-	Pet3Gender = "Dropdown18"
-	Pet3Stray = "Dropdown19"
-	Pet3OlderThan5 = "Dropdown20"
-	Pet3DogWeight = "Dropdown21"
-	Pet3Special = "Dropdown22"
+	Pet2Name = "Text8"
+	Pet2Breed = "Text9"
+	Pet2Color = "Text10"
+	Pet2DistinguishingCharacteristics = "Text11"
 )
 
 var cities = []string{
@@ -205,7 +189,6 @@ var withinCityLimitOptions = []string{
 }
 
 var species = []string{
-	"N/A",
 	"Cat",
 	"Dog",
 }
@@ -264,7 +247,7 @@ func main() {
 	//	fmt.Println("found", len(fields), "fields")
 
 	for _, fld := range fields {
-		fmt.Println("- Name:", fld.Name(), "Type:", fld.Type(), "Value:", fld.Value())
+		//		fmt.Println("- Name:", fld.Name(), "Type:", fld.Type(), "Value:", fld.Value())
 
 		switch fld.Name() {
 		case FirstName:
@@ -319,70 +302,6 @@ func main() {
 			fld.SetValue(fld.PossibleValues()[index])
 		case Pet1Special:
 			var selectedOption = GetValue(FindEntry(responses, FindById(19)))
-			var index = FindStringIndex(special, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet2Name:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(22))))
-		case Pet2Breed:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(25))))
-		case Pet2Color:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(26))))
-		case Pet2DistinguishingCharacteristics:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(27))))
-		case Pet2Species:
-			var selectedOption = GetValue(FindEntry(responses, FindById(23)))
-			var index = FindStringIndex(species, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet2Gender:
-			var selectedOption = GetValue(FindEntry(responses, FindById(24)))
-			var index = FindStringIndex(gender, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet2Stray:
-			var selectedOption = GetValue(FindEntry(responses, FindById(28)))
-			var index = FindStringIndex(stray, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet2OlderThan5:
-			var selectedOption = GetValue(FindEntry(responses, FindById(29)))
-			var index = FindStringIndex(olderThan5Years, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet2DogWeight:
-			var selectedOption = GetValue(FindEntry(responses, FindById(30)))
-			var index = FindStringIndex(dogWeightRange, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet2Special:
-			var selectedOption = GetValue(FindEntry(responses, FindById(31)))
-			var index = FindStringIndex(special, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet3Name:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(34))))
-		case Pet3Breed:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(37))))
-		case Pet3Color:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(38))))
-		case Pet3DistinguishingCharacteristics:
-			fld.SetValue(GetValue(FindEntry(responses, FindById(39))))
-		case Pet3Species:
-			var selectedOption = GetValue(FindEntry(responses, FindById(35)))
-			var index = FindStringIndex(species, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet3Gender:
-			var selectedOption = GetValue(FindEntry(responses, FindById(36)))
-			var index = FindStringIndex(gender, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet3Stray:
-			var selectedOption = GetValue(FindEntry(responses, FindById(40)))
-			var index = FindStringIndex(stray, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet3OlderThan5:
-			var selectedOption = GetValue(FindEntry(responses, FindById(41)))
-			var index = FindStringIndex(olderThan5Years, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet3DogWeight:
-			var selectedOption = GetValue(FindEntry(responses, FindById(42)))
-			var index = FindStringIndex(dogWeightRange, StringEquals(selectedOption))
-			fld.SetValue(fld.PossibleValues()[index])
-		case Pet3Special:
-			var selectedOption = GetValue(FindEntry(responses, FindById(43)))
 			var index = FindStringIndex(special, StringEquals(selectedOption))
 			fld.SetValue(fld.PossibleValues()[index])
 		}
