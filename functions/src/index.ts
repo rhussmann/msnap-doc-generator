@@ -12,27 +12,23 @@ export const generateVoucherIntake = functions.https.onRequest(async (request, r
     headers: request.rawHeaders,
     body: JSON.stringify(request.body),
   });
+  if (request.method !== "POST" || request.header("content-type") !== "application/json") {
+    return response.sendStatus(404);
+  }
 
-  // The last bit is to wire the incoming request body to a temp file
-  // and set `inputJson` to the tmp file path, rather than hardcoding
-  // it to point to `test.json`
-  //
-  // e.g.
-  // const inputJsonTmpFile = tmp.fileSync();
-  // const inputJson = inputJsonTmpFile.name;
-  // fs.writeFileSync(inputJson, JSON.stringify(request.body));
-  //
-  const inputJson = path.join(__dirname, "..", "etc", "test.json");
+  if (!request.body.responses || !Array.isArray(request.body.responses)) {
+    return response.status(400).send("Invalid request payload");
+  }
+
+  const inputJsonTmpFile = tmp.fileSync();
+  fs.writeFileSync(inputJsonTmpFile.name, JSON.stringify(request.body));
+
   const inputForm = path.join(__dirname, "..", "etc", "form.docx");
   const docxOutfile = tmp.fileSync();
-  console.log(`Tempfile is ${docxOutfile.name}`);
-  const result = await executeBinary(inputJson, inputForm, docxOutfile.name);
-  console.log(`Exec result: ${result}`);
 
-  if (request.method !== "POST" || request.header("content-type") !== "application/json") {
-    response.sendStatus(404);
-    return;
-  }
+  console.log(`Tempfile is ${docxOutfile.name}`);
+  const result = await executeBinary(inputJsonTmpFile.name, inputForm, docxOutfile.name);
+  console.log(`Exec result: ${result}`);
 
   // Return mocked docx
   fs.readFile(docxOutfile.name, (err, data) => {
