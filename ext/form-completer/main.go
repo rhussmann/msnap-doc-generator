@@ -224,8 +224,10 @@ var special = []string{
 
 func main() {
 	inputJson := os.Args[1]
-	outputDocx := os.Args[2]
+	inputDocx := os.Args[2]
+	outputDocx := os.Args[3]
 	fmt.Printf("Input JSON: %+v\n", inputJson)
+	fmt.Printf("Input DOCX: %+v\n", inputDocx)
 	fmt.Printf("Output DOCX: %+v\n", outputDocx)
 
 	data, err := ioutil.ReadFile(inputJson)
@@ -234,7 +236,7 @@ func main() {
 	json.Unmarshal([]byte(entryJson), &result)
 	responses := result.Responses
 
-	doc, err := document.Open("form.docx")
+	doc, err := document.Open(inputDocx)
 	if err != nil {
 		log.Fatalf("error opening form: %s", err)
 	}
